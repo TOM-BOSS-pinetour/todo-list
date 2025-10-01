@@ -1,12 +1,13 @@
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <>
      <div>
+      <input type="Add Here Your New Lists" />
       <button>add</button>
+      
      </div>
     </>
   )
