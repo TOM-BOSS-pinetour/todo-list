@@ -1,63 +1,40 @@
 import { useState } from "react";
 import "./App.css";
+import Task from "./test";
 
 function App() {
-  const [inputValue, setInputValue] = useState("");
-  const [list, setList] = useState([]);
-  const [filter, setFilter] = useState("all"); // all | active | completed
+  const [text, setText] = useState("");
+  const [array, setArray] = useState([]);
 
-  const addItem = () => {
-    if (inputValue.trim() !== "") {
-      setList([...list, { text: inputValue, checked: false }]);
-      setInputValue("");
-    }
-  };
-
-  const toggleChecked = (index) => {
-    const newList = [...list];
-    newList[index].checked = !newList[index].checked;
-    setList(newList);
-  };
-
-  const filteredList = list.filter((item) => {
-    if (filter === "active") return !item.checked;
-    if (filter === "completed") return item.checked;
-    return true; // all
-  });
+  function handleAdd() {
+    if (text.trim() === "") return;
+    setArray([...array, text]);
+    setText("");
+  }
 
   return (
-    <div>
-      <h1>To-Do List</h1>
-
-      <input
-        type="text"
-        placeholder=""
-        value={inputValue}
-        onChange={(e) => setInputValue(e.target.value)}
-      />
-      <button onClick={addItem}>add</button>
-
-      <div style={{ marginTop: "10px" }}>
-        <button onClick={() => setFilter("all")}>All</button>
-        <button onClick={() => setFilter("active")}>Active</button>
-        <button onClick={() => setFilter("completed")}>Completed</button>
+    <div className="card">
+      To-Do List
+      <div className="head">
+        <input
+          onKeyDown={(e) => {
+            if (e.key === "Enter") {
+              handleAdd();
+            }
+          }}
+          onChange={(e) => setText(e.target.value)}
+          value={text}
+          placeholder="Enter text"
+        />
+        <button className="addbutton" onClick={handleAdd}>
+          Add
+        </button>
       </div>
-
-      <ul>
-        {filteredList.map((item, index) => (
-          <li
-            key={index}
-            style={{ textDecoration: item.checked ? "line-through" : "none" }}
-          >
-            <input
-              type="checkbox"
-              checked={item.checked}
-              onChange={() => toggleChecked(list.indexOf(item))}
-            />
-            {item.text}
-          </li>
+      <div>
+        {array.map((item, index) => (
+          <Task key={index} index={index} item={item} />
         ))}
-      </ul>
+      </div>
     </div>
   );
 }
