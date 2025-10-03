@@ -24,11 +24,16 @@ function App() {
           }}
           onChange={(e) => setText(e.target.value)}
           value={text}
-          placeholder="Enter text"
+          placeholder="Add a new task..."
         />
         <button className="addbutton" onClick={handleAdd}>
           Add
         </button>
+      </div>
+      <div className="filter">
+        <button className="addbutton">All</button>
+        <button className="addbutton">Active</button>
+        <button className="addbutton">Completed</button>
       </div>
       <div>
         {array.map((item, index) => (

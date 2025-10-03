@@ -1,3 +1,10 @@
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 50px;
+}
+
 .app {
   max-width: 400px;
   margin: 40px auto;
@@ -48,4 +55,8 @@ input {
   font-weight: 600;
   font-size: 20px;
   text-align: center;
+}
+.filter {
+  gap: 8px;
+  display: flex;
 }
